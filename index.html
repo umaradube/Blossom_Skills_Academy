@@ -2275,7 +2275,11 @@
             <h3>Send an Enquiry</h3>
             <p>Fill in the form and we'll be in touch shortly.</p>
 
-            <form id="contact-form" novalidate aria-label="Contact form">
+            <form id="contact-form" name="contact" method="POST" action="/" data-netlify="true" data-netlify-honeypot="bot-field" novalidate aria-label="Contact form">
+              <input type="hidden" name="form-name" value="contact" />
+              <div style="display:none;">
+                <label>Don’t fill this out if you’re human: <input name="bot-field" /></label>
+              </div>
               <div class="form-row">
                 <div class="form-group">
                   <label for="first-name">First Name <span style="color:#EF4444" aria-hidden="true">*</span></label>
@@ -2325,7 +2329,7 @@
                 <svg id="btn-spinner" width="16" height="16" style="display:none; animation: spin 1s linear infinite;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke-opacity=".25"/><path d="M21 12a9 9 0 00-9-9" stroke="white"/></svg>
               </button>
 
-              /* @keyframes spin { to { transform: rotate(360deg); } } */
+            @keyframes spin { to { transform: rotate(360deg); } } 
             </form>
 
             <!-- Success state -->
@@ -2541,6 +2545,11 @@
       const email      = form.email.value.trim();
       const phone      = form.phone.value.trim();
       const inquiry    = form.inquiry_type.value;
+      const botField   = form['bot-field'].value;
+
+      if (botField) {
+        return;
+      }
 
       if (!firstName)             { showError('Please enter your first name.'); return; }
       if (!lastName)              { showError('Please enter your last name.'); return; }
@@ -2549,15 +2558,31 @@
       if (!phone)                 { showError('Please enter your phone or WhatsApp number.'); return; }
       if (!inquiry)               { showError('Please select an inquiry type.'); return; }
 
-      // Simulate async submission
       submitBtn.disabled = true;
       btnText.textContent = 'Sending…';
       spinner.style.display = 'inline-block';
 
-      setTimeout(() => {
-        form.style.display = 'none';
-        successBox.style.display = 'block';
-      }, 1400);
+      const formData = new FormData(form);
+      const body = new URLSearchParams(formData).toString();
+
+      fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body,
+      })
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
+          }
+          form.style.display = 'none';
+          successBox.style.display = 'block';
+        })
+        .catch(() => {
+          submitBtn.disabled = false;
+          btnText.textContent = 'Submit Enquiry';
+          spinner.style.display = 'none';
+          showError('Submission failed. Please try again or email info@blossomsa.co.za.');
+        });
     });
 
     /* ── Smooth scroll offset (account for fixed nav) ── */

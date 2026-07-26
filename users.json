@@ -1,0 +1,27 @@
+{
+    "admin1": {
+        "password": "123",
+        "role": "Admin",
+        "mall": "1"
+    },
+    "owner1": {
+        "password": "123",
+        "role": "Owner",
+        "mall": null
+    },
+    "umar": {
+        "password": "123",
+        "role": "Customer",
+        "mall": null
+    },
+    "poop": {
+        "password": "123",
+        "role": "Customer",
+        "mall": null
+    },
+    "poo": {
+        "password": "159",
+        "role": "Customer",
+        "mall": null
+    }
+}

@@ -1,0 +1,26 @@
+[
+    {
+        "record_id": 1,
+        "username": "umar",
+        "mall_id": "1",
+        "plate": "ND50781ZN",
+        "entry_time": "2026-05-31T22:37:14.090919",
+        "exit_time": "2026-05-31T22:37:54.867194",
+        "hours": 3.5,
+        "fee": 15.0,
+        "paid": true,
+        "rate_type": "Flat Rate"
+    },
+    {
+        "record_id": 2,
+        "username": "umar",
+        "mall_id": "3",
+        "plate": "ND500ZN",
+        "entry_time": "2026-05-31T22:39:15.842595",
+        "exit_time": null,
+        "hours": 0.0,
+        "fee": 0.0,
+        "paid": false,
+        "rate_type": ""
+    }
+]

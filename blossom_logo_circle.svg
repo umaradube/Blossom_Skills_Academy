@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Circular background -->
+  <circle cx="50" cy="50" r="50" fill="#0B1F4B"/>
+  
+  <!-- Blossom shape - simplified circular logo -->
+  <g transform="translate(50, 50)">
+    <!-- Center circle -->
+    <circle cx="0" cy="0" r="8" fill="#C8A96E"/>
+    
+    <!-- 5 petals arranged in a circle -->
+    <circle cx="0" cy="-15" r="6" fill="#E8C597" opacity="0.9"/>
+    <circle cx="14.3" cy="-4.6" r="6" fill="#E8C597" opacity="0.9"/>
+    <circle cx="8.8" cy="12.1" r="6" fill="#E8C597" opacity="0.9"/>
+    <circle cx="-8.8" cy="12.1" r="6" fill="#E8C597" opacity="0.9"/>
+    <circle cx="-14.3" cy="-4.6" r="6" fill="#E8C597" opacity="0.9"/>
+  </g>
+</svg>

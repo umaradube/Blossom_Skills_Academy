@@ -1,0 +1,25 @@
+<svg viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#3B82F6;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1e3a7a;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#bg1)"/>
+  <circle cx="400" cy="300" r="180" fill="rgba(255,255,255,0.1)"/>
+  <circle cx="400" cy="300" r="140" fill="rgba(255,255,255,0.15)"/>
+  <g transform="translate(400, 280)">
+    <!-- Head -->
+    <circle cx="0" cy="-40" r="35" fill="#FFD5B9"/>
+    <!-- Body -->
+    <rect x="-25" y="0" width="50" height="70" rx="10" fill="#4ADE80"/>
+    <!-- Arms -->
+    <rect x="-50" y="10" width="25" height="15" rx="7" fill="#FFD5B9"/>
+    <rect x="25" y="10" width="25" height="15" rx="7" fill="#FFD5B9"/>
+    <!-- Heart in hands -->
+    <g transform="translate(50, 20)">
+      <path d="M0 8C0 8 -6 2 -8 0C-10 -2 -12 -1 -12 2C-12 5 -8 8 0 12C8 8 12 5 12 2C12 -1 10 -2 8 0C6 2 0 8 0 8Z" fill="#EF4444"/>
+    </g>
+  </g>
+  <text x="400" y="550" text-anchor="middle" font-size="28" font-weight="bold" fill="white" font-family="Arial">Professional Care Training</text>
+</svg>

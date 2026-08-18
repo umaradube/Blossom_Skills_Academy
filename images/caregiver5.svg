@@ -1,0 +1,26 @@
+<svg viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg5" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#06B6D4;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0891B2;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#bg5)"/>
+  <circle cx="400" cy="300" r="180" fill="rgba(255,255,255,0.1)"/>
+  <circle cx="400" cy="300" r="140" fill="rgba(255,255,255,0.15)"/>
+  <g transform="translate(400, 280)">
+    <!-- Head -->
+    <circle cx="0" cy="-40" r="35" fill="#FFD5B9"/>
+    <!-- Body -->
+    <rect x="-25" y="0" width="50" height="70" rx="10" fill="#34D399"/>
+    <!-- Arms -->
+    <rect x="-50" y="10" width="25" height="15" rx="7" fill="#FFD5B9"/>
+    <rect x="25" y="10" width="25" height="15" rx="7" fill="#FFD5B9"/>
+    <!-- Care symbols - medical cross -->
+    <g transform="translate(0, 35)">
+      <rect x="-4" y="-15" width="8" height="30" fill="#FFFFFF" opacity="0.9"/>
+      <rect x="-15" y="-4" width="30" height="8" fill="#FFFFFF" opacity="0.9"/>
+    </g>
+  </g>
+  <text x="400" y="550" text-anchor="middle" font-size="28" font-weight="bold" fill="white" font-family="Arial">Compassionate Healthcare</text>
+</svg>

@@ -6,6 +6,7 @@
   <title>Blossom Skills Academy – Caregiver Course | Durban, South Africa</title>
   <meta name="description" content="Blossom Skills Academy offers a comprehensive Caregiver Course with online theory and in-person practicals in Durban, South Africa." />
   <meta property="og:image" content="blossom_logo.svg">
+  <link rel="icon" type="image/svg+xml" href="blossom_logo_circle.svg">
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -680,6 +681,7 @@
       position: relative;
       border-radius: 20px;
       overflow: hidden;
+      height: 420px;
     }
 
     .about-img-placeholder {
@@ -733,10 +735,19 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
+      display: block;
     }
 
     .carousel-slide.placeholder {
+      opacity: 1;
       background: linear-gradient(135deg, var(--sky-light) 0%, #DBEAFE 100%);
+    }
+
+    .carousel-slide.placeholder svg {
+      width: 120px;
+      height: 120px;
+      color: var(--sky);
+      opacity: 0.4;
     }
 
     .carousel-controls {
@@ -1226,6 +1237,13 @@
       border-radius: 20px;
       overflow: hidden;
       border: 1px solid #E2E8F0;
+    }
+
+    .map-card iframe {
+      border-radius: 20px 20px 0 0;
+      display: block;
+      width: 100%;
+      height: 420px;
     }
 
     .map-placeholder {
@@ -1750,6 +1768,7 @@
       .values-grid { grid-template-columns: 1fr; }
       .form-row { grid-template-columns: 1fr; }
       .form-card { padding: 28px 20px; }
+      .map-card iframe { height: 320px; }
       .footer-grid { grid-template-columns: 1fr; gap: 36px; }
       .footer-bottom { flex-direction: column; text-align: center; }
       .footer-links { justify-content: center; }
@@ -2265,15 +2284,16 @@
         <!-- Map / Location card -->
         <div class="practicals-map reveal">
           <div class="map-card">
-            <div class="map-placeholder" role="img" aria-label="Durban, KwaZulu-Natal location indicator">
-              <div class="map-pin">
-                <div class="map-pin-icon">
-                  <svg width="22" height="22" fill="none" stroke="white" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-                </div>
-                <span>Durban</span>
-                <small>KwaZulu-Natal, South Africa</small>
-              </div>
-            </div>
+            <iframe 
+              width="100%" 
+              height="420" 
+              style="border:0; border-radius: 20px;" 
+              loading="lazy" 
+              allowfullscreen="" 
+              referrerpolicy="no-referrer-when-downgrade"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3456.8245678910234!2d31.0043!3d-29.8245!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1e96b8e3c3c3c3c3%3A0x1e96b8e3c3c3c3c3!2s357%20Che%20Guevara%20Rd%2C%20Glenwood%2C%20Durban%2C%204091!5e0!3m2!1sen!2sza!4v1629800000000" 
+              aria-label="Google Map of Blossom Skills Academy location">
+            </iframe>
             <div class="map-info">
               <div class="map-info-item">
                 <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
@@ -2715,61 +2735,89 @@
     let currentSlide = 0;
     let slides = [];
     let autoRotateInterval;
-    const imageNames = ['caregiver1.jpg', 'caregiver2.jpg', 'caregiver3.jpg', 'caregiver4.jpg', 'caregiver5.jpg'];
+    const imageNames = ['img1.jpeg', 'img2.jpeg', 'img3.jpeg'];
     const autoRotateDelay = 5000; // 5 seconds
 
     function loadCarouselImages() {
-      // Try to load images from the images folder
+      if (!carouselContainer) {
+        console.warn('Carousel container not found');
+        return;
+      }
+      
       slides = [];
       const placeholderSlide = document.querySelector('.carousel-slide.placeholder');
+      
+      // Clear any existing slides
+      document.querySelectorAll('.carousel-slide:not(.placeholder)').forEach(slide => slide.remove());
+      document.querySelectorAll('.carousel-dot').forEach(dot => dot.remove());
       
       imageNames.forEach((imageName, index) => {
         const slide = document.createElement('div');
         slide.className = 'carousel-slide';
-        if (index === 0) slide.classList.add('active');
         
         const img = document.createElement('img');
         img.src = `images/${imageName}`;
-        img.alt = `Blossom Skills Academy - Caregiver training ${index + 1}`;
+        img.alt = `Blossom Skills Academy - Home based care training ${index + 1}`;
+        img.style.display = 'none'; // Hide initially
+        
+        img.onload = () => {
+          img.style.display = 'block';
+          slide.classList.add('loaded');
+          console.log(`Loaded: ${imageName}`);
+        };
+        
         img.onerror = () => {
-          // If image fails to load, just keep the placeholder
-          console.log(`Image not found: images/${imageName}`);
+          console.error(`Failed to load: images/${imageName}`);
         };
         
         slide.appendChild(img);
-        carouselContainer.insertBefore(slide, placeholderSlide.nextSibling);
+        carouselContainer.appendChild(slide);
         slides.push(slide);
         
         // Create carousel control dot
         const dot = document.createElement('button');
         dot.className = 'carousel-dot';
-        if (index === 0) dot.classList.add('active');
         dot.setAttribute('role', 'tab');
         dot.setAttribute('aria-label', `Go to slide ${index + 1}`);
+        dot.style.cursor = 'pointer';
         dot.addEventListener('click', () => goToSlide(index));
         carouselControlsContainer.appendChild(dot);
       });
       
-      if (slides.length > 0) {
-        startAutoRotate();
-      }
+      // Set first slide as active after images load
+      setTimeout(() => {
+        if (slides.length > 0) {
+          currentSlide = 0;
+          updateSlide();
+          startAutoRotate();
+        }
+        
+        // Hide placeholder after slides are loaded
+        if (placeholderSlide && slides.some(s => s.querySelector('img[style*="display: block"]'))) {
+          placeholderSlide.style.display = 'none';
+        }
+      }, 100);
     }
 
     function updateSlide() {
-      // Update slides
-      document.querySelectorAll('.carousel-slide').forEach((slide, index) => {
-        slide.classList.toggle('active', index === currentSlide);
+      // Update only image slides
+      slides.forEach((slide, index) => {
+        const isActive = index === currentSlide;
+        slide.classList.toggle('active', isActive);
       });
       
       // Update dots
       document.querySelectorAll('.carousel-dot').forEach((dot, index) => {
-        dot.classList.toggle('active', index === currentSlide);
+        const isActive = index === currentSlide;
+        dot.classList.toggle('active', isActive);
       });
+      
+      console.log(`Slide changed to: ${currentSlide + 1}/${slides.length}`);
     }
 
     function goToSlide(index) {
       if (slides.length === 0) return;
-      currentSlide = (index + slides.length) % slides.length;
+      currentSlide = index % slides.length;
       updateSlide();
       resetAutoRotate();
     }

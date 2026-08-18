@@ -432,6 +432,10 @@
       50%       { box-shadow: 0 0 0 6px rgba(74,222,128,0.1); }
     }
 
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
     .hero-badge span {
       font-size: 0.78rem;
       color: rgba(255,255,255,0.85);
@@ -695,6 +699,98 @@
       position: absolute;
       inset: 0;
       background: radial-gradient(circle at 70% 30%, rgba(59,130,246,0.2) 0%, transparent 60%);
+    }
+
+    /* Carousel Styles */
+    .carousel-container {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, var(--sky-light) 0%, #DBEAFE 100%);
+      border-radius: 20px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .carousel-slide {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      transition: opacity 0.8s ease-in-out;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .carousel-slide.active {
+      opacity: 1;
+    }
+
+    .carousel-slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .carousel-slide.placeholder {
+      background: linear-gradient(135deg, var(--sky-light) 0%, #DBEAFE 100%);
+    }
+
+    .carousel-controls {
+      position: absolute;
+      bottom: 16px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 8px;
+      z-index: 10;
+    }
+
+    .carousel-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.5);
+      border: 2px solid rgba(255, 255, 255, 0.7);
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .carousel-dot.active {
+      background: rgba(255, 255, 255, 1);
+    }
+
+    .carousel-nav-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255, 255, 255, 0.3);
+      border: none;
+      color: white;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.3s ease;
+      z-index: 9;
+    }
+
+    .carousel-nav-btn:hover {
+      background: rgba(255, 255, 255, 0.6);
+    }
+
+    .carousel-nav-btn.prev {
+      left: 12px;
+    }
+
+    .carousel-nav-btn.next {
+      right: 12px;
     }
 
     .about-icon-large {
@@ -1810,11 +1906,11 @@
                 <span>Online Theory</span>
               </div>
               <div class="hero-stat">
-                <strong>6 Mo</strong>
+                <strong>6 Months</strong>
                 <span>Duration</span>
               </div>
               <div class="hero-stat">
-                <strong>ZA</strong>
+                <strong>QCTO</strong>
                 <span>Accredited</span>
               </div>
             </div>
@@ -1834,7 +1930,7 @@
       <div class="trust-inner">
         <div class="trust-item">
           <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622C17.176 19.29 21 14.591 21 9c0-1.18-.154-2.32-.445-3.4z"/></svg>
-          SA Accredited Programme
+          QCTO Accredited Programme
         </div>
         <!-- <div class="trust-item">
           <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
@@ -1867,12 +1963,18 @@
         <!-- Visual -->
         <div class="about-visual reveal">
           <div class="about-img-wrap">
-            <div class="about-img-placeholder" role="img" aria-label="Caring healthcare professional">
-              <svg class="about-icon-large" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                <!-- Heart with hands -->
-                <circle cx="50" cy="50" r="45" fill="rgba(59,130,246,0.08)" stroke="rgba(59,130,246,0.15)" stroke-width="2"/>
-                <path d="M50 70C50 70 28 58 28 43C28 36.373 33.373 31 40 31C44.0406 31 47.6025 32.9959 50 36C52.3975 32.9959 55.9594 31 60 31C66.627 31 72 36.373 72 43C72 58 50 70 50 70Z" fill="rgba(59,130,246,0.25)" stroke="rgba(59,130,246,0.5)" stroke-width="1.5"/>
-              </svg>
+            <div class="carousel-container">
+              <div class="carousel-slide placeholder active">
+                <svg class="about-icon-large" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                  <!-- Heart with hands -->
+                  <circle cx="50" cy="50" r="45" fill="rgba(59,130,246,0.08)" stroke="rgba(59,130,246,0.15)" stroke-width="2"/>
+                  <path d="M50 70C50 70 28 58 28 43C28 36.373 33.373 31 40 31C44.0406 31 47.6025 32.9959 50 36C52.3975 32.9959 55.9594 31 60 31C66.627 31 72 36.373 72 43C72 58 50 70 50 70Z" fill="rgba(59,130,246,0.25)" stroke="rgba(59,130,246,0.5)" stroke-width="1.5"/>
+                </svg>
+              </div>
+              <!-- Carousel slides will be populated by JavaScript -->
+              <button class="carousel-nav-btn prev" aria-label="Previous image">❮</button>
+              <button class="carousel-nav-btn next" aria-label="Next image">❯</button>
+              <div class="carousel-controls" role="tablist"></div>
             </div>
           </div>
 
@@ -2026,6 +2128,13 @@
               <div class="info-item">
                 <div class="info-dot"></div>
                 <div>
+                  <strong>Qualification Level</strong>
+                  <span>NQF Level 3</span>
+                </div>
+              </div>
+              <div class="info-item">
+                <div class="info-dot"></div>
+                <div>
                   <strong>Duration</strong>
                   <span>6 months</span>
                 </div>
@@ -2168,7 +2277,7 @@
             <div class="map-info">
               <div class="map-info-item">
                 <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-                <span>Durban, KwaZulu-Natal (venue shared upon enrollment)</span>
+                <span>357 Che Guevara Rd, Glenwood, Durban, KwaZulu-Natal</span>
               </div>
               <div class="map-info-item">
                 <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
@@ -2252,7 +2361,7 @@
 
           <div class="social-links" aria-label="Social media links">
             <!-- Facebook -->
-            <a href="#" class="social-link" aria-label="Facebook">
+            <a href="https://www.facebook.com/share/14mxiPVBb7u/" class="social-link" aria-label="Facebook">
               <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
             </a>
             <!-- Instagram -->
@@ -2264,9 +2373,9 @@
               <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.890-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
             </a>
             <!-- LinkedIn -->
-            <a href="#" class="social-link" aria-label="LinkedIn">
+            <!--<a href="#" class="social-link" aria-label="LinkedIn">
               <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
-            </a>
+            </a>-->
           </div>
         </div>
 
@@ -2305,9 +2414,9 @@
               <div class="form-group">
                 <label for="inquiry-type">Inquiry Type <span style="color:#EF4444" aria-hidden="true">*</span></label>
                 <div class="select-wrap">
-                  <select id="inquiry-type" name="inquiry_type" required>
+                  <select id="inquiry-type" name="inquiry_type" required aria-required="true">
                     <option value="" disabled selected>Select an option…</option>
-                    <option value="enroll">I want to enroll in the Caregiver Course</option>
+                    <option value="enroll">I want to enroll in the Home Based Care Course</option>
                     <option value="fees">Course fees &amp; payment plans</option>
                     <option value="practical">Information about practical sessions</option>
                     <option value="accreditation">Accreditation &amp; certification queries</option>
@@ -2330,7 +2439,6 @@
                 <svg id="btn-spinner" width="16" height="16" style="display:none; animation: spin 1s linear infinite;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke-opacity=".25"/><path d="M21 12a9 9 0 00-9-9" stroke="white"/></svg>
               </button>
 
-            @keyframes spin { to { transform: rotate(360deg); } } 
             </form>
 
             <!-- Success state -->
@@ -2372,18 +2480,18 @@
               <small>Durban, South Africa</small>
             </div>
           </div>
-          <p>Empowering South African caregivers through accessible, accredited blended learning — because compassionate care changes lives.</p>
+          <p>Empowering South African home based care providers through accessible, accredited blended learning — because compassionate care changes lives.</p>
           <div class="footer-social" aria-label="Social media">
-            <a href="#" aria-label="Facebook">
+            <a href="https://www.facebook.com/share/14mxiPVBb7u/" aria-label="Facebook">
               <svg width="15" height="15" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
             </a>
-            <a href="#" aria-label="Instagram">
+            <a href="https://www.instagram.com/blossom_skills_academy/" aria-label="Instagram">
               <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
             </a>
-            <a href="#" aria-label="WhatsApp">
+            <a href="https://wa.me/27671576087" aria-label="WhatsApp">
               <svg width="15" height="15" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.890-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
             </a>
-            <a href="#" aria-label="LinkedIn">
+            <a href="https://www.linkedin.com/school/blossom-skills-academy/" aria-label="LinkedIn">
               <svg width="15" height="15" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
             </a>
           </div>
@@ -2394,7 +2502,7 @@
           <h4>Quick Links</h4>
           <ul>
             <li><a href="#about">About Us</a></li>
-            <li><a href="#course">The Caregiver Course</a></li>
+            <li><a href="#course">The Home Based Care Course</a></li>
             <li><a href="#practicals">Practical Sessions</a></li>
             <li><a href="#contact">Enroll Now</a></li>
             <li><a href="#contact">Contact Us</a></li>
@@ -2437,7 +2545,7 @@
           <a href="#">Privacy Policy</a>
           <a href="#">Terms of Service</a>
           <a href="#">Cookie Policy</a>
-          <a href="Youtube.com/ihatemylifeandwantodiIbrokupwithmygirlfriendbecauseicantdealwiththethingsshedoesasmuchasiloveheriguessitisntunconditionalwhensomeofthethingsshedoesdrivesmeawayandfuckihatemylifeihatemyselfihatethatthisishappeningwhywhywhywhywhyfuckingwhyihaventsleptivebarelyeatenandmylifeisinshamblesifeelfreelikeabirdinacagewhichultimatlyfaaaahhhhhhhuuuuuuukkkuuummmmeeeeeeaaaannn">
+          <a href="#">Sitemap</a>
         </div>
       </div>
     </div>
@@ -2597,6 +2705,109 @@
         window.scrollTo({ top, behavior: 'smooth' });
       });
     });
+
+    /* ── Image Carousel ── */
+    const carouselContainer = document.querySelector('.carousel-container');
+    const carouselControlsContainer = document.querySelector('.carousel-controls');
+    const prevBtn = document.querySelector('.carousel-nav-btn.prev');
+    const nextBtn = document.querySelector('.carousel-nav-btn.next');
+    
+    let currentSlide = 0;
+    let slides = [];
+    let autoRotateInterval;
+    const imageNames = ['caregiver1.jpg', 'caregiver2.jpg', 'caregiver3.jpg', 'caregiver4.jpg', 'caregiver5.jpg'];
+    const autoRotateDelay = 5000; // 5 seconds
+
+    function loadCarouselImages() {
+      // Try to load images from the images folder
+      slides = [];
+      const placeholderSlide = document.querySelector('.carousel-slide.placeholder');
+      
+      imageNames.forEach((imageName, index) => {
+        const slide = document.createElement('div');
+        slide.className = 'carousel-slide';
+        if (index === 0) slide.classList.add('active');
+        
+        const img = document.createElement('img');
+        img.src = `images/${imageName}`;
+        img.alt = `Blossom Skills Academy - Caregiver training ${index + 1}`;
+        img.onerror = () => {
+          // If image fails to load, just keep the placeholder
+          console.log(`Image not found: images/${imageName}`);
+        };
+        
+        slide.appendChild(img);
+        carouselContainer.insertBefore(slide, placeholderSlide.nextSibling);
+        slides.push(slide);
+        
+        // Create carousel control dot
+        const dot = document.createElement('button');
+        dot.className = 'carousel-dot';
+        if (index === 0) dot.classList.add('active');
+        dot.setAttribute('role', 'tab');
+        dot.setAttribute('aria-label', `Go to slide ${index + 1}`);
+        dot.addEventListener('click', () => goToSlide(index));
+        carouselControlsContainer.appendChild(dot);
+      });
+      
+      if (slides.length > 0) {
+        startAutoRotate();
+      }
+    }
+
+    function updateSlide() {
+      // Update slides
+      document.querySelectorAll('.carousel-slide').forEach((slide, index) => {
+        slide.classList.toggle('active', index === currentSlide);
+      });
+      
+      // Update dots
+      document.querySelectorAll('.carousel-dot').forEach((dot, index) => {
+        dot.classList.toggle('active', index === currentSlide);
+      });
+    }
+
+    function goToSlide(index) {
+      if (slides.length === 0) return;
+      currentSlide = (index + slides.length) % slides.length;
+      updateSlide();
+      resetAutoRotate();
+    }
+
+    function nextSlide() {
+      if (slides.length === 0) return;
+      currentSlide = (currentSlide + 1) % slides.length;
+      updateSlide();
+      resetAutoRotate();
+    }
+
+    function prevSlide() {
+      if (slides.length === 0) return;
+      currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+      updateSlide();
+      resetAutoRotate();
+    }
+
+    function startAutoRotate() {
+      autoRotateInterval = setInterval(() => {
+        nextSlide();
+      }, autoRotateDelay);
+    }
+
+    function resetAutoRotate() {
+      clearInterval(autoRotateInterval);
+      startAutoRotate();
+    }
+
+    if (prevBtn) prevBtn.addEventListener('click', prevSlide);
+    if (nextBtn) nextBtn.addEventListener('click', nextSlide);
+
+    // Initialize carousel when DOM is ready
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', loadCarouselImages);
+    } else {
+      loadCarouselImages();
+    }
 
   </script>
 
